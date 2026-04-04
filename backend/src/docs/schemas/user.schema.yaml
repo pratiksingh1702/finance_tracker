@@ -1,0 +1,53 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 60d0fe4f5311236168a109ca
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        role:
+          type: string
+          enum: [admin, analyst, viewer]
+          example: viewer
+        isActive:
+          type: boolean
+          example: true
+        lastLoginAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    
+    UpdateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe
+        role:
+          type: string
+          enum: [admin, analyst, viewer]
+        isActive:
+          type: boolean
+    
+    AssignRoleRequest:
+      type: object
+      required:
+        - role
+      properties:
+        role:
+          type: string
+          enum: [admin, analyst, viewer]
+          example: analyst

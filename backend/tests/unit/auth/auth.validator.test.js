@@ -1,0 +1,7 @@
+'use strict';
+
+describe('Auth Validator', () => {
+  test('should have a placeholder test', () => {
+    expect(true).toBe(true);
+  });
+});

@@ -1,0 +1,79 @@
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          example: Food
+        type:
+          type: string
+          enum: [income, expense]
+        color:
+          type: string
+          example: '#EF4444'
+        icon:
+          type: string
+          example: restaurant-outline
+    
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          example: Lunch at Restaurant
+        amount:
+          type: number
+          example: 45.50
+        type:
+          type: string
+          enum: [income, expense]
+        status:
+          type: string
+          enum: [pending, completed, failed]
+        date:
+          type: string
+          format: date
+        category:
+          $ref: '#/components/schemas/Category'
+        notes:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    
+    CreateTransactionRequest:
+      type: object
+      required:
+        - title
+        - amount
+        - type
+        - category
+      properties:
+        title:
+          type: string
+        amount:
+          type: number
+        type:
+          type: string
+          enum: [income, expense]
+        category:
+          type: string
+          description: Category ID
+        date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [pending, completed, failed]
+        notes:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string

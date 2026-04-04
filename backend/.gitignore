@@ -1,0 +1,7 @@
+node_modules/
+.env
+src/logs/app/*.log
+src/logs/audit/*.log
+coverage/
+dist/
+.DS_Store

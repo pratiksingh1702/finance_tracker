@@ -1,0 +1,254 @@
+{
+  "info": {
+    "name": "Finance Dashboard API",
+    "description": "Postman collection for testing the Finance Dashboard Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success) {",
+                  "    pm.environment.set(\"accessToken\", jsonData.data.tokens.access.token);",
+                  "    pm.environment.set(\"refreshToken\", jsonData.data.tokens.refresh.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@finance-dashboard.com\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New User\",\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Tokens",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users (Admin Only)",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Finance",
+      "item": [
+        {
+          "name": "Transactions",
+          "item": [
+            {
+              "name": "List Transactions",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transactions",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "transactions"]
+                }
+              }
+            },
+            {
+              "name": "Create Transaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+                },
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Grocery Store\",\n  \"amount\": 150.75,\n  \"type\": \"expense\",\n  \"category\": \"CATEGORY_ID_HERE\",\n  \"date\": \"2024-03-15T12:00:00.000Z\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/transactions",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "transactions"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Categories",
+          "item": [
+            {
+              "name": "List Categories",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+                },
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/categories",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "categories"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Full Dashboard",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/analytics/dashboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "analytics", "dashboard"]
+            }
+          }
+        },
+        {
+          "name": "Summary",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/analytics/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "analytics", "summary"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

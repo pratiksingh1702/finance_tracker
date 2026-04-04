@@ -1,0 +1,3 @@
+.table {
+  @apply w-full border-collapse text-left text-sm;
+}

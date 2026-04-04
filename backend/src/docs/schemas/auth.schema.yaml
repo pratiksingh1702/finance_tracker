@@ -1,0 +1,65 @@
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: admin@finance-dashboard.com
+        password:
+          type: string
+          format: password
+          example: admin123
+    
+    RegisterRequest:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        password:
+          type: string
+          format: password
+          example: password123
+    
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
+            tokens:
+              type: object
+              properties:
+                access:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    expires:
+                      type: string
+                refresh:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    expires:
+                      type: string

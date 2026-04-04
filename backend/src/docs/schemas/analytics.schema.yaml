@@ -1,0 +1,48 @@
+components:
+  schemas:
+    DashboardSummary:
+      type: object
+      properties:
+        totalIncome:
+          type: number
+        totalExpenses:
+          type: number
+        netBalance:
+          type: number
+        transactionCount:
+          type: integer
+        savingsRate:
+          type: number
+          description: Percentage of income saved
+    
+    CategorySummary:
+      type: object
+      properties:
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+        totalIncome:
+          type: number
+        totalExpenses:
+          type: number
+        net:
+          type: number
+        expenseShare:
+          type: number
+          description: Percentage of total expenses
+    
+    MonthlyTrend:
+      type: object
+      properties:
+        period:
+          type: string
+          example: '2024-03'
+        totalIncome:
+          type: number
+        totalExpenses:
+          type: number
+        net:
+          type: number
+        runningBalance:
+          type: number

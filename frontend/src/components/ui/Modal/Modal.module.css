@@ -1,0 +1,23 @@
+.overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4;
+}
+
+.content {
+  @apply relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-100 animate-in fade-in zoom-in duration-200;
+}
+
+.header {
+  @apply flex items-center justify-between p-6 border-b border-slate-100;
+}
+
+.closeBtn {
+  @apply p-1 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors;
+}
+
+.body {
+  @apply p-6;
+}
+
+.footer {
+  @apply flex items-center justify-end gap-3 p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl;
+}

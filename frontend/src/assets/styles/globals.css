@@ -1,0 +1,83 @@
+@import './variables.css';
+@import './themes.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  #root { min-height: 100vh; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-300; }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl border border-slate-100 shadow-card;
+  }
+
+  .btn-primary {
+    @apply bg-brand-600 text-white rounded-lg px-4 py-2 text-sm font-medium
+           hover:bg-brand-700 active:bg-brand-800
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-colors duration-150;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-slate-700 border border-slate-200 rounded-lg px-4 py-2 text-sm font-medium
+           hover:bg-slate-50 active:bg-slate-100
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-colors duration-150;
+  }
+
+  .btn-danger {
+    @apply bg-rose-500 text-white rounded-lg px-4 py-2 text-sm font-medium
+           hover:bg-rose-600 active:bg-rose-700
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-colors duration-150;
+  }
+
+  .input-base {
+    @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm
+           text-slate-900 placeholder-slate-400
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
+           disabled:bg-slate-50 disabled:cursor-not-allowed
+           transition-shadow duration-150;
+  }
+
+  .label-base {
+    @apply block text-sm font-medium text-slate-700 mb-1.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .page-header {
+    @apply flex items-center justify-between mb-6;
+  }
+
+  .page-title {
+    @apply text-xl font-semibold text-slate-900;
+  }
+
+  .stat-income  { @apply text-emerald-600; }
+  .stat-expense { @apply text-rose-500; }
+}
